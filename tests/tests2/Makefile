@@ -152,9 +152,9 @@ all test tests2.all: $(filter-out $(SKIP),$(TESTS))
 
 T1 = $(TCC) $(FLAGS) $(T2) $(ARGS)
 # Cross compiler does not support -run and compiler warnings
-# should be record
+# should be recorded
 ifeq ($(CONFIG_cross), yes)
-RUN_PREFIX :=qemu-riscv32 -L /opt/riscv32-gnu-toolchain-glibc-bin-32/sysroot
+RUN_PREFIX :=qemu-riscv32 -L /opt/riscv32-gnu-toolchain-glibc-sf/sysroot
 T2 = $1 -o a.exe 2>$*.output && $(RUN_PREFIX) ./a.exe
 T3 = $(FILTER) >>$*.output 2>&1 || true \
      && diff -Nbu $(filter %.expect,$^) $*.output \
