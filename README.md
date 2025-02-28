@@ -46,3 +46,34 @@ To run the built-in tests, run the follw command:
 cp riscv32-ilp32-tcc tcc
 make tests2.all
 ```
+
+## Known bug
+
+I also collect some programs that current version of tcc-rv32 failed to compile
+as follow
+
+```c
+struct Wrap {
+  int *digit;
+};
+int aaa;
+struct Wrap global_wrap[] = {
+ ((struct Wrap) {&aaa}),
+};
+int main() {}
+```
+Result: `tcc: error: undefined symbol ''`
+
+```c
+//compile only
+struct x { int a, b, c; }; // must contains at lease 3 elements
+
+void b (struct x);
+
+void foo(){
+  struct x aa = {1,1,1};
+
+  b (aa);
+}
+```
+Result: tcc crashed, segmentation fault. At tccgen.c:type_size
