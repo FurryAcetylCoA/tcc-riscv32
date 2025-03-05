@@ -338,7 +338,7 @@ extern long double strtold (const char *__nptr, char **__endptr);
 #  if defined TCC_RISCV32_ilp32
 #   define CONFIG_TCC_ELFINTERP "/lib/ld-linux-riscv32-ilp32.so.1"
 #  else
-#   define CONFIG_TCC_ELFINTERP "/lib/ld-linux-riscv32-ilp32d.so.1"
+#   define CONFIG_TCC_ELFINTERP "/lib/ld-linux-riscv32-ilp32.so.1"
 #  endif
 # elif !defined(TCC_ARM_EABI)
 #  if defined(TCC_MUSL)

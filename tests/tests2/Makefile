@@ -68,6 +68,7 @@ ifeq ($(ARCH),riscv32)
  SKIP += 70_floating_point_literals.test
  SKIP += 73_arm64.test # contains floating stuff
  SKIP += 83_utf8_in_identifiers.test # contains floating stuff
+ SKIP += 93_integer_promotion.test # sort of UB
 endif
 
 ifeq ($(CONFIG_cross), yes)
@@ -154,7 +155,7 @@ T1 = $(TCC) $(FLAGS) $(T2) $(ARGS)
 # Cross compiler does not support -run and compiler warnings
 # should be record
 ifeq ($(CONFIG_cross), yes)
-RUN_PREFIX :=qemu-riscv32 -L /opt/riscv32-gnu-toolchain-glibc-bin-32/sysroot
+RUN_PREFIX :=qemu-riscv32 -L /opt/riscv32-gnu-toolchain-glibc-sf/sysroot
 T2 = $1 -o a.exe 2>$*.output && $(RUN_PREFIX) ./a.exe
 T3 = $(FILTER) >>$*.output 2>&1 || true \
      && diff -Nbu $(filter %.expect,$^) $*.output \
